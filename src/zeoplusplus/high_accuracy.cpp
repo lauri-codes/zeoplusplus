@@ -4,7 +4,13 @@
 {
     "distutils": {
         "depends": [
-            "src/sphere_approx.h"
+            "src/area_and_volume.h",
+            "src/geometry.h",
+            "src/network.h",
+            "src/networkio.h",
+            "src/networkstorage.h",
+            "src/sphere_approx.h",
+            "src/voronoicell.h"
         ],
         "extra_compile_args": [
             "-fPIC"
@@ -34,6 +40,7 @@
             "src/ray.cc",
             "src/networkaccessibility.cc",
             "src/network.cc",
+            "src/OMS.cc",
             "src/networkio.cc",
             "src/grid.cc",
             "src/symbcalc.cc",

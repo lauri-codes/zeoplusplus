@@ -58,7 +58,7 @@ def pruned_highaccuracy_voronoi_network(atmnet, delta=0.5):
     """
     ha_atmnet = atmnet.copy()
     high_accuracy_atmnet(ha_atmnet, "MED")
-    vornet,fcs = ha_atmnet.perform_voronoi_decomposition()
+    vornet,ecs,fcs = ha_atmnet.perform_voronoi_decomposition()
     cdef ATOM_NETWORK* c_atmnetptr = (<AtomNetwork?>atmnet).thisptr
     cdef ATOM_NETWORK* c_ha_atmnetptr = (<AtomNetwork?>ha_atmnet).thisptr
     cdef VORONOI_NETWORK* c_vornetptr = (<VoronoiNetwork?>vornet).thisptr
@@ -84,7 +84,7 @@ def get_nearest_largest_diameter_highaccuracy_vornode( atmnet, delta=0.25):
     #print ''
     #print '**********ONE DECOMPOSITION.************'
     #print ''
-    vornet, fcs = atmnet.perform_voronoi_decomposition()
+    vornet,ecs,fcs = atmnet.perform_voronoi_decomposition()
     cdef ATOM_NETWORK* c_atmnet_ptr = (<AtomNetwork?>atmnet).thisptr
     cdef VORONOI_NETWORK* c_vornet_ptr = (<VoronoiNetwork?>vornet).thisptr
     cdef VORONOI_NETWORK* c_ha_vornet_ptr = (<VoronoiNetwork?>ha_vornet).thisptr

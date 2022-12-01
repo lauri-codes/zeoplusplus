@@ -4,6 +4,11 @@
 {
     "distutils": {
         "depends": [
+            "src/area_and_volume.h",
+            "src/geometry.h",
+            "src/network.h",
+            "src/networkio.h",
+            "src/networkstorage.h",
             "src/voronoicell.h"
         ],
         "extra_compile_args": [
@@ -38,6 +43,8 @@
             "src/OMS.cc",
             "src/area_and_volume.cc",
             "src/networkaccessibility.cc",
+            "src/material.cc",
+            "src/psd.cc",
             "src/graphstorage.cc",
             "src/networkanalysis.cc",
             "src/v_network.cc"

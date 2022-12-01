@@ -3,11 +3,11 @@ from zeoplusplus.netstorage import AtomNetwork
 
 atmnet = AtomNetwork.read_from_CSSR("MgO.cssr", rad_file="MgO.rad")
 atmnet.write_to_XYZ("orig_mgo.xyz", False, True)
-vornet,fcs = atmnet.perform_voronoi_decomposition()
+vornet,ecs,fcs = atmnet.perform_voronoi_decomposition()
 vornet.write_to_XYZ("orig_mgo_voro.xyz", 0)
 vornet.analyze_writeto_XYZ('orig_mgo', 0.4, atmnet)
 high_accuracy_atmnet(atmnet, "DEF")
-vornet,fcs = atmnet.perform_voronoi_decomposition()
+vornet,ecs,fcs = atmnet.perform_voronoi_decomposition()
 vornet.write_to_XYZ("test_high.xyz", 0)
 vornet.analyze_writeto_XYZ('mgo_high', 0.4, atmnet)
 atmnet.write_to_CIF("highacc_MgO.cif")

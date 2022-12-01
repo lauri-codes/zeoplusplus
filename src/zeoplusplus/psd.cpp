@@ -4,7 +4,13 @@
 {
     "distutils": {
         "depends": [
-            "src/psd.h"
+            "src/area_and_volume.h",
+            "src/geometry.h",
+            "src/network.h",
+            "src/networkio.h",
+            "src/networkstorage.h",
+            "src/psd.h",
+            "src/voronoicell.h"
         ],
         "extra_compile_args": [
             "-fPIC"

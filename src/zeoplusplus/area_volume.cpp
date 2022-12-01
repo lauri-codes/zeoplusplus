@@ -4,7 +4,12 @@
 {
     "distutils": {
         "depends": [
-            "src/area_and_volume.h"
+            "src/area_and_volume.h",
+            "src/geometry.h",
+            "src/network.h",
+            "src/networkio.h",
+            "src/networkstorage.h",
+            "src/voronoicell.h"
         ],
         "extra_compile_args": [
             "-fPIC"
@@ -42,6 +47,8 @@
             "src/ray.cc",
             "src/rmsd.cc",
             "src/networkaccessibility.cc",
+            "src/material.cc",
+            "src/psd.cc",
             "src/channel.cc",
             "src/net.cc"
         ]

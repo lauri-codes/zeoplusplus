@@ -4,7 +4,14 @@
 {
     "distutils": {
         "depends": [
-            "src/cycle.h"
+            "src/area_and_volume.h",
+            "src/cycle.h",
+            "src/geometry.h",
+            "src/graphstorage.h",
+            "src/network.h",
+            "src/networkio.h",
+            "src/networkstorage.h",
+            "src/voronoicell.h"
         ],
         "extra_compile_args": [
             "-fPIC"
@@ -28,6 +35,7 @@
             "src/networkinfo.cc",
             "src/mindist.cc",
             "src/geometry.cc",
+            "src/net.cc",
             "src/network.cc",
             "src/OMS.cc",
             "src/voronoicell.cc",
@@ -35,6 +43,10 @@
             "src/networkanalysis.cc",
             "src/channel.cc",
             "src/v_network.cc",
+            "src/symmetry.cc",
+            "src/ray.cc",
+            "src/rmsd.cc",
+            "src/material.cc",
             "src/area_and_volume.cc",
             "src/networkaccessibility.cc",
             "src/string_additions.cc",

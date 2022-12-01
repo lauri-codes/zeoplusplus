@@ -107,6 +107,8 @@ voronoicell_srcfiles = [
 	'src/OMS.cc',
 	'src/area_and_volume.cc',
 	'src/networkaccessibility.cc',
+	'src/material.cc',
+	'src/psd.cc',
 	'src/graphstorage.cc',
 	'src/networkanalysis.cc',
 	'src/v_network.cc',
@@ -128,6 +130,7 @@ highaccuracy_srcfiles = [
 	'src/ray.cc',
 	'src/networkaccessibility.cc',
 	'src/network.cc',
+    'src/OMS.cc',
 	'src/networkio.cc',
 	'src/grid.cc',
 	'src/symbcalc.cc',
@@ -162,6 +165,8 @@ areavol_srcfiles = [
     'src/ray.cc',
     'src/rmsd.cc',
     'src/networkaccessibility.cc',
+	'src/material.cc',
+	'src/psd.cc',
     'src/channel.cc',
     'src/net.cc'
 ]
@@ -197,6 +202,7 @@ cycle_srcfiles = [
     'src/networkinfo.cc',
     'src/mindist.cc',
     'src/geometry.cc',
+    'src/net.cc', 
     'src/network.cc',
     'src/OMS.cc',
     'src/voronoicell.cc',
@@ -204,6 +210,10 @@ cycle_srcfiles = [
     'src/networkanalysis.cc',
     'src/channel.cc',
     'src/v_network.cc',
+    'src/symmetry.cc',
+    'src/ray.cc',
+    'src/rmsd.cc',
+    'src/material.cc',
     'src/area_and_volume.cc',
     'src/networkaccessibility.cc',
     'src/string_additions.cc',
@@ -335,14 +345,14 @@ if USE_CYTHON:
     extensions = cythonize(extensions)
 
 setup(
-    name = 'zeoplusplus',
-    version = '0.1.0',
-    description = "Python interface to Zeo++",
+    name='zeoplusplus',
+    version='0.1.0',
+    description="Python interface to Zeo++",
     long_description="Python interface to Zeo++",
-    url = "https://github.com/lauri-codes/zeoplusplus",
-    author = "Lauri Himanen",
-    license = "",
-    classifiers = [
+    url="https://github.com/lauri-codes/zeoplusplus",
+    author="Lauri Himanen",
+    license="",
+    classifiers=[
         "Development Status :: 3 - Alpha",
         "Programming Language :: C++",
         "Programming Language :: Cython",
@@ -356,13 +366,13 @@ setup(
         "Programming Language :: Python :: 3 :: Only",
         "Intended Audience :: Science/Research",
         "Topic :: Scientific/Engineering"
-        ],
+    ],
     # In the Cython build guide it is said that zip_safe should be disabled
     # when building with setuptools
     packages=find_packages('src'),
     package_dir={'': 'src'},
     zip_safe=False,
     ext_modules=extensions,
-    keywords="descriptor machine learning atomistic structure materials science",
+    keywords="zeo++ porous materials science",
     python_requires=">=3.6",
 )

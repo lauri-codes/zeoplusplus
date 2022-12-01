@@ -5,9 +5,12 @@
     "distutils": {
         "depends": [
             "src/area_and_volume.h",
+            "src/geometry.h",
             "src/network.h",
+            "src/networkinfo.h",
             "src/networkio.h",
-            "src/networkstorage.h"
+            "src/networkstorage.h",
+            "src/voronoicell.h"
         ],
         "extra_compile_args": [
             "-fPIC"
@@ -5673,7 +5676,7 @@ static PyObject *__pyx_pf_11zeoplusplus_10netstorage_11AtomNetwork_30perform_vor
   PyObject *__pyx_v_edge_centers = NULL;
   std::vector<VOR_EDGE>  __pyx_v_vedges;
   std::vector<VOR_NODE>  __pyx_v_vnodes;
-  std::vector<VOR_EDGE> ::size_type __pyx_v_i;
+  std::vector<VOR_CELL> ::size_type __pyx_v_i;
   int __pyx_v_edge_orig;
   int __pyx_v_edge_end;
   VOR_NODE __pyx_v_o_vnode;
@@ -5686,7 +5689,7 @@ static PyObject *__pyx_pf_11zeoplusplus_10netstorage_11AtomNetwork_30perform_vor
   PyObject *__pyx_v_face_node_ids = NULL;
   std::vector<VOR_FACE> ::size_type __pyx_v_j;
   PyObject *__pyx_v_node_id_list = NULL;
-  std::vector<Point> ::size_type __pyx_v_k;
+  std::vector<int> ::size_type __pyx_v_k;
   PyObject *__pyx_v_node_id_set = NULL;
   struct __pyx_obj_11zeoplusplus_8geometry_Point *__pyx_v_centroid = NULL;
   PyObject *__pyx_v_fcs = NULL;
@@ -5702,7 +5705,7 @@ static PyObject *__pyx_pf_11zeoplusplus_10netstorage_11AtomNetwork_30perform_vor
   std::vector<VOR_NODE>  __pyx_t_5;
   std::vector<VOR_EDGE> ::size_type __pyx_t_6;
   std::vector<VOR_EDGE> ::size_type __pyx_t_7;
-  std::vector<VOR_EDGE> ::size_type __pyx_t_8;
+  std::vector<VOR_CELL> ::size_type __pyx_t_8;
   int __pyx_t_9;
   PyObject *__pyx_t_10 = NULL;
   PyObject *__pyx_t_11 = NULL;
@@ -5717,7 +5720,7 @@ static PyObject *__pyx_pf_11zeoplusplus_10netstorage_11AtomNetwork_30perform_vor
   std::vector<int>  __pyx_t_20;
   std::vector<int> ::size_type __pyx_t_21;
   std::vector<int> ::size_type __pyx_t_22;
-  std::vector<Point> ::size_type __pyx_t_23;
+  std::vector<int> ::size_type __pyx_t_23;
   Point *__pyx_t_24;
   std::vector<Point>  __pyx_t_25;
   std::vector<Point> ::size_type __pyx_t_26;
@@ -6003,10 +6006,10 @@ static PyObject *__pyx_pf_11zeoplusplus_10netstorage_11AtomNetwork_30perform_vor
  *             vfaces = vcells[i].faces
  *             for j in range(vfaces.size()):
  */
-  __pyx_t_14 = __pyx_v_vcells.size();
-  __pyx_t_15 = __pyx_t_14;
-  for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_15; __pyx_t_6+=1) {
-    __pyx_v_i = __pyx_t_6;
+  __pyx_t_8 = __pyx_v_vcells.size();
+  __pyx_t_14 = __pyx_t_8;
+  for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
+    __pyx_v_i = __pyx_t_15;
 
     /* "zeoplusplus/netstorage.pyx":409
  *         face_node_ids = set()
@@ -6149,10 +6152,10 @@ static PyObject *__pyx_pf_11zeoplusplus_10netstorage_11AtomNetwork_30perform_vor
  *                         centroid.x = centroid.x + vertices[k].vals[0]
  *                         centroid.y = centroid.y + vertices[k].vals[1]
  */
-        __pyx_t_23 = __pyx_v_vertices.size();
-        __pyx_t_26 = __pyx_t_23;
-        for (__pyx_t_27 = 0; __pyx_t_27 < __pyx_t_26; __pyx_t_27+=1) {
-          __pyx_v_k = __pyx_t_27;
+        __pyx_t_26 = __pyx_v_vertices.size();
+        __pyx_t_27 = __pyx_t_26;
+        for (__pyx_t_21 = 0; __pyx_t_21 < __pyx_t_27; __pyx_t_21+=1) {
+          __pyx_v_k = __pyx_t_21;
 
           /* "zeoplusplus/netstorage.pyx":422
  *                     vertices = vfaces[j].vertices
