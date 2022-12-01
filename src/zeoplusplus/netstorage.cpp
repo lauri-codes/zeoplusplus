@@ -17,6 +17,12 @@
             "src/voro++/src"
         ],
         "language": "c++",
+        "libraries": [
+            "voro++"
+        ],
+        "library_dirs": [
+            "src/voro++/src"
+        ],
         "name": "zeoplusplus.netstorage",
         "sources": [
             "src/zeoplusplus/netstorage.pyx",

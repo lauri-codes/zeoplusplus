@@ -14,6 +14,12 @@
             "src/voro++/src"
         ],
         "language": "c++",
+        "libraries": [
+            "voro++"
+        ],
+        "library_dirs": [
+            "src/voro++/src"
+        ],
         "name": "zeoplusplus.netio",
         "sources": [
             "src/zeoplusplus/netio.pyx",

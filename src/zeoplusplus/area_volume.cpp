@@ -14,6 +14,12 @@
             "src/voro++/src"
         ],
         "language": "c++",
+        "libraries": [
+            "voro++"
+        ],
+        "library_dirs": [
+            "src/voro++/src"
+        ],
         "name": "zeoplusplus.area_volume",
         "sources": [
             "src/zeoplusplus/area_volume.pyx",
