@@ -47,6 +47,7 @@
             "src/ray.cc",
             "src/rmsd.cc",
             "src/material.cc",
+            "src/psd.cc",
             "src/area_and_volume.cc",
             "src/networkaccessibility.cc",
             "src/string_additions.cc",

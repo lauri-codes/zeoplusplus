@@ -4,6 +4,8 @@ from distutils.ccompiler import new_compiler
 from distutils.sysconfig import customize_compiler
 from setuptools import setup, find_packages
 from setuptools.extension import Extension
+from subprocess import getoutput
+
 
 # Check python version
 if sys.version_info[:2] < (3, 6):
@@ -20,7 +22,15 @@ includedirs = ["src/voro++/src"]
 libdirs = ["src/voro++/src"]
 libraries = ['voro++']
 cpp_extra_link_args = []
-cpp_extra_compile_args = ["-fPIC"]
+# These default compile flags mimic the flags used in the Zeo++/Voro++ Makefile
+# with the addition of the -fPIC flag which is needed to build a shared library.
+cpp_extra_compile_args = [
+    "-fPIC",
+    # "-Wall",
+    # "-ansi",
+    # "-pedantic",
+    # "-O3",
+]
 
 def using_clang():
     """Will we be using a clang compiler?
@@ -38,36 +48,60 @@ if platform.system() == "Darwin" and using_clang():
     cpp_extra_link_args.append("-stdlib=libc++")
     cpp_extra_link_args.append("-mmacosx-version-min=10.7")
 
-netstorage_srcfiles = [
-    'src/zeoplusplus/netstorage'+ext,
-    'src/networkstorage.cc', 
+common_srcfiles = [
+    'src/networkstorage.cc',
+    'src/networkinfo.cc',
     'src/mindist.cc',
     'src/geometry.cc',
-    'src/networkinfo.cc',
+    'src/network.cc',
+    'src/net.cc',
+    'src/OMS.cc',
+    'src/voronoicell.cc',
+    'src/v_network.cc',
+    'src/graphstorage.cc',
+    'src/networkanalysis.cc',
+    'src/channel.cc',
+	'src/symmetry.cc',
+    'src/ray.cc',
+    'src/rmsd.cc',
+    'src/material.cc',
+    'src/psd.cc',
+    'src/area_and_volume.cc',
+    'src/networkaccessibility.cc',
+    'src/string_additions.cc',
+]
+netstorage_srcfiles = [
+    'src/zeoplusplus/netstorage'+ext,
     'src/networkio.cc',
     'src/grid.cc',
     'src/symbcalc.cc',
-    'src/string_additions.cc', 
-    'src/voronoicell.cc', 
-    'src/networkanalysis.cc',
-    'src/graphstorage.cc',
-    'src/area_and_volume.cc',
-    'src/network.cc',
-    'src/OMS.cc',
-    'src/v_network.cc',
-    'src/symmetry.cc',
-    'src/networkaccessibility.cc',
-    'src/channel.cc',
-    'src/net.cc',
-    'src/ray.cc',
-	'src/rmsd.cc',
-	'src/material.cc',
-	'src/psd.cc',
-]
-netinfo_srcfiles = [
-    'src/zeoplusplus/netinfo'+ext,
-    'src/networkinfo.cc',
-]
+] + common_srcfiles
+voronoicell_srcfiles = [
+    'src/zeoplusplus/voronoicell'+ext,
+] + common_srcfiles
+highaccuracy_srcfiles = [
+    'src/zeoplusplus/high_accuracy'+ext,
+	'src/networkio.cc',
+	'src/grid.cc',
+	'src/symbcalc.cc',
+    'src/sphere_approx.cc',
+] + common_srcfiles
+areavol_srcfiles = [
+    'src/zeoplusplus/area_volume'+ext,
+    'src/networkio.cc',
+    'src/grid.cc',
+    'src/symbcalc.cc',
+] + common_srcfiles
+cluster_srcfiles = [
+    'src/zeoplusplus/cluster'+ext,
+    'src/cluster.cc',
+    'src/sphere_approx.cc',
+] + common_srcfiles
+cycle_srcfiles = [
+    'src/zeoplusplus/cycle'+ext,
+    'src/cycle.cc',
+    'src/sphere_approx.cc',
+] + common_srcfiles
 netio_srcfiles = [
     'src/zeoplusplus/netio'+ext,
     'src/networkio.cc', 
@@ -84,144 +118,27 @@ netio_srcfiles = [
 ]
 graphstorage_srcfiles = [
     'src/zeoplusplus/graphstorage'+ext,
-    'src/graphstorage.cc'
-]
-psd_srcfiles = [
-    'src/zeoplusplus/psd'+ext,
-    'src/psd.cc'
-]
-voronoicell_srcfiles = [
-    'src/zeoplusplus/voronoicell'+ext,
-    'src/voronoicell.cc',
+    'src/graphstorage.cc',
+    'src/networkstorage.cc',
+    'src/net.cc',
     'src/geometry.cc',
-	'src/networkstorage.cc',
-	'src/net.cc',
-	'src/mindist.cc', 
-	'src/networkinfo.cc',
-	'src/rmsd.cc',
-	'src/symmetry.cc', 
-	'src/string_additions.cc',
-	'src/ray.cc',
-	'src/channel.cc',
-	'src/network.cc',
-	'src/OMS.cc',
-	'src/area_and_volume.cc',
-	'src/networkaccessibility.cc',
-	'src/material.cc',
-	'src/psd.cc',
-	'src/graphstorage.cc',
-	'src/networkanalysis.cc',
-	'src/v_network.cc',
+    'src/string_additions.cc',
 ]
 channel_srcfiles = [
     'src/zeoplusplus/channel'+ext,
-    'src/channel.cc'
-]
-highaccuracy_srcfiles = [
-    'src/zeoplusplus/high_accuracy'+ext,
-    'src/sphere_approx.cc',
-    'src/networkstorage.cc', 
-    'src/networkinfo.cc',
-    'src/mindist.cc',
-    'src/geometry.cc',
-    'src/net.cc', 
-	'src/symmetry.cc',
-	'src/string_additions.cc',
-	'src/ray.cc',
-	'src/networkaccessibility.cc',
-	'src/network.cc',
-    'src/OMS.cc',
-	'src/networkio.cc',
-	'src/grid.cc',
-	'src/symbcalc.cc',
-	'src/voronoicell.cc',
-	'src/graphstorage.cc',
-	'src/channel.cc',
-	'src/v_network.cc',
-	'src/networkanalysis.cc',
-	'src/area_and_volume.cc',
-	'src/rmsd.cc',
-	'src/material.cc',
-	'src/psd.cc',
-]
-areavol_srcfiles = [
-    'src/zeoplusplus/area_volume'+ext,
-    'src/area_and_volume.cc',
-    'src/networkinfo.cc',
-    'src/networkstorage.cc',
-    'src/mindist.cc',
-    'src/geometry.cc',
-    'src/networkio.cc',
-    'src/grid.cc',
-    'src/symbcalc.cc',
-    'src/string_additions.cc',
-    'src/voronoicell.cc',
-    'src/networkanalysis.cc',
-    'src/graphstorage.cc',
-    'src/symmetry.cc',
-    'src/network.cc',
-    'src/OMS.cc',
-    'src/v_network.cc',
-    'src/ray.cc',
-    'src/rmsd.cc',
-    'src/networkaccessibility.cc',
-	'src/material.cc',
-	'src/psd.cc',
     'src/channel.cc',
-    'src/net.cc'
-]
-cluster_srcfiles = [
-    'src/zeoplusplus/cluster'+ext,
-    'src/cluster.cc',
-    'src/networkstorage.cc',
-    'src/networkinfo.cc',
-    'src/mindist.cc',
-    'src/geometry.cc',
-    'src/network.cc',
-    'src/OMS.cc',
-    'src/voronoicell.cc',
-    'src/graphstorage.cc',
-    'src/networkanalysis.cc',
-    'src/channel.cc',
-    'src/v_network.cc',
-    'src/area_and_volume.cc',
-    'src/networkaccessibility.cc',
-    'src/string_additions.cc',
-    'src/sphere_approx.cc',
-    'src/net.cc',
-	'src/symmetry.cc',
-    'src/ray.cc',
-    'src/rmsd.cc',
-    'src/material.cc',
-    'src/psd.cc',
-]
-cycle_srcfiles = [
-    'src/zeoplusplus/cycle'+ext,
-    'src/cycle.cc',
-    'src/networkstorage.cc',
-    'src/networkinfo.cc',
-    'src/mindist.cc',
-    'src/geometry.cc',
-    'src/net.cc', 
-    'src/network.cc',
-    'src/OMS.cc',
-    'src/voronoicell.cc',
-    'src/graphstorage.cc',
-    'src/networkanalysis.cc',
-    'src/channel.cc',
-    'src/v_network.cc',
-    'src/symmetry.cc',
-    'src/ray.cc',
-    'src/rmsd.cc',
-    'src/material.cc',
-    'src/area_and_volume.cc',
-    'src/networkaccessibility.cc',
-    'src/string_additions.cc',
-    'src/sphere_approx.cc'
 ]
 geometry_srcfiles = [
     'src/zeoplusplus/geometry'+ext,
     'src/geometry.cc'
+]
+netinfo_srcfiles = [
+    'src/zeoplusplus/netinfo'+ext,
+    'src/networkinfo.cc',
+]
+psd_srcfiles = [
+    'src/zeoplusplus/psd'+ext,
+    'src/psd.cc',
 ]
 extensions = [
     Extension(
@@ -235,62 +152,8 @@ extensions = [
         language=language
     ),
     Extension(
-        "zeoplusplus.geometry", 
-        sources=geometry_srcfiles,
-        extra_compile_args=cpp_extra_compile_args,
-        extra_link_args=cpp_extra_link_args,
-        language=language
-    ),
-    Extension(
-        "zeoplusplus.netinfo", 
-        sources=netinfo_srcfiles,
-        extra_compile_args=cpp_extra_compile_args,
-        extra_link_args=cpp_extra_link_args,
-        language=language
-    ),
-    Extension(
         "zeoplusplus.voronoicell",
         sources=voronoicell_srcfiles,
-        include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
-        extra_compile_args=cpp_extra_compile_args,
-        extra_link_args=cpp_extra_link_args,
-        language=language
-    ),
-    Extension(
-        "zeoplusplus.netio",
-        sources=netio_srcfiles,
-        include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
-        extra_compile_args=cpp_extra_compile_args,
-        extra_link_args=cpp_extra_link_args,
-        language=language
-    ),
-    Extension(
-        "zeoplusplus.graphstorage",
-        sources=graphstorage_srcfiles,
-        include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
-        extra_compile_args=cpp_extra_compile_args,
-        extra_link_args=cpp_extra_link_args,
-        language=language
-    ),
-    Extension(
-        "zeoplusplus.psd",
-        sources=psd_srcfiles,
-        include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
-        extra_compile_args=cpp_extra_compile_args,
-        extra_link_args=cpp_extra_link_args,
-        language=language
-    ),
-    Extension(
-        "zeoplusplus.channel", 
-        sources=channel_srcfiles,
         include_dirs=includedirs,
         libraries=libraries,
         library_dirs=libdirs,
@@ -337,7 +200,61 @@ extensions = [
         extra_compile_args=cpp_extra_compile_args,
         extra_link_args=cpp_extra_link_args,
         language=language
-    )
+    ),
+    Extension(
+        "zeoplusplus.netio",
+        sources=netio_srcfiles,
+        include_dirs=includedirs,
+        libraries=libraries,
+        library_dirs=libdirs,
+        extra_compile_args=cpp_extra_compile_args,
+        extra_link_args=cpp_extra_link_args,
+        language=language
+    ),
+    Extension(
+        "zeoplusplus.graphstorage",
+        sources=graphstorage_srcfiles,
+        include_dirs=includedirs,
+        libraries=libraries,
+        library_dirs=libdirs,
+        extra_compile_args=cpp_extra_compile_args,
+        extra_link_args=cpp_extra_link_args,
+        language=language
+    ),
+    Extension(
+        "zeoplusplus.channel", 
+        sources=channel_srcfiles,
+        include_dirs=includedirs,
+        libraries=libraries,
+        library_dirs=libdirs,
+        extra_compile_args=cpp_extra_compile_args,
+        extra_link_args=cpp_extra_link_args,
+        language=language
+    ),
+    Extension(
+        "zeoplusplus.geometry", 
+        sources=geometry_srcfiles,
+        extra_compile_args=cpp_extra_compile_args,
+        extra_link_args=cpp_extra_link_args,
+        language=language
+    ),
+    Extension(
+        "zeoplusplus.netinfo", 
+        sources=netinfo_srcfiles,
+        extra_compile_args=cpp_extra_compile_args,
+        extra_link_args=cpp_extra_link_args,
+        language=language
+    ),
+    Extension(
+        "zeoplusplus.psd",
+        sources=psd_srcfiles,
+        include_dirs=includedirs,
+        libraries=libraries,
+        library_dirs=libdirs,
+        extra_compile_args=cpp_extra_compile_args,
+        extra_link_args=cpp_extra_link_args,
+        language=language
+    ),
 ]
 
 if USE_CYTHON:
