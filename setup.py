@@ -26,10 +26,10 @@ cpp_extra_link_args = []
 # with the addition of the -fPIC flag which is needed to build a shared library.
 cpp_extra_compile_args = [
     "-fPIC",
-    # "-Wall",
-    # "-ansi",
-    # "-pedantic",
-    # "-O3",
+    "-Wall",
+    "-ansi",
+    "-pedantic",
+    "-O3",
 ]
 
 def using_clang():
