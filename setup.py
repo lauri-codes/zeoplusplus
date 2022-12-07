@@ -102,6 +102,9 @@ cycle_srcfiles = [
     'src/cycle.cc',
     'src/sphere_approx.cc',
 ] + common_srcfiles
+graphstorage_srcfiles = [
+    'src/zeoplusplus/graphstorage'+ext,
+] + common_srcfiles
 netio_srcfiles = [
     'src/zeoplusplus/netio'+ext,
     'src/networkio.cc', 
@@ -115,28 +118,6 @@ netio_srcfiles = [
     'src/geometry.cc',
     'src/net.cc',
     'src/rmsd.cc',
-]
-graphstorage_srcfiles = [
-    'src/zeoplusplus/graphstorage'+ext,
-    'src/graphstorage.cc',
-    'src/networkanalysis.cc',
-    'src/networkstorage.cc',
-    'src/networkinfo.cc',
-    'src/network.cc',
-    'src/net.cc',
-    'src/mindist.cc',
-    'src/geometry.cc',
-    'src/OMS.cc',
-    'src/voronoicell.cc',
-    'src/v_network.cc',
-    'src/channel.cc',
-    'src/symmetry.cc',
-    'src/ray.cc',
-    'src/rmsd.cc',
-    'src/material.cc',
-    'src/area_and_volume.cc',
-    'src/networkaccessibility.cc',
-    'src/string_additions.cc',
 ]
 channel_srcfiles = [
     'src/zeoplusplus/channel'+ext,
@@ -216,8 +197,8 @@ extensions = [
         language=language
     ),
     Extension(
-        "zeoplusplus.netio",
-        sources=netio_srcfiles,
+        "zeoplusplus.graphstorage",
+        sources=graphstorage_srcfiles,
         include_dirs=includedirs,
         libraries=libraries,
         library_dirs=libdirs,
@@ -226,8 +207,8 @@ extensions = [
         language=language
     ),
     Extension(
-        "zeoplusplus.graphstorage",
-        sources=graphstorage_srcfiles,
+        "zeoplusplus.netio",
+        sources=netio_srcfiles,
         include_dirs=includedirs,
         libraries=libraries,
         library_dirs=libdirs,
