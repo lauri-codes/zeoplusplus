@@ -21,6 +21,10 @@ Cython binding code. If you however need to re-create them, the following
 instructions will help
 
 ### Voro++
+TODO: The pre-build Voro++ library seems to be causing problems on other
+machines. It should be compiled as a part of the installation to avoid these
+problems.
+
 Voro++ currently requires a separate build step, which has to be performed
 before attempting the Cython build. This is done by adding the `-fPIC` flag to
 the file in `src/voro++/config.mk`, and then creating a library file with
@@ -37,8 +41,7 @@ libdirs = ["src/voro++/src"]
 libraries = ['voro++']
 ```
 
-to the extension definitions. Ideally we will later include Voro++ compilation
-as part of of the installation procedure or as part of a pre-built wheel.
+to the extension definitions.
 
 ### Cython
 The cython wrapper definitions live inside src/zeoplusplus. These bindings can
