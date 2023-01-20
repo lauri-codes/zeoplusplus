@@ -31,7 +31,7 @@
 
 
 #include "heap.h"
-#include <voro++.hh>
+#include "voro++/src/voro++.hh"
 
 #include "networkstorage.h"
 #include "voronoicell.h"

@@ -18,14 +18,11 @@ if sys.version_info[:2] < (3, 6):
 USE_CYTHON = False
 ext = '.pyx' if USE_CYTHON else '.cpp'
 language = "c++"
-includedirs = ["src/voro++/src"]
-libdirs = ["src/voro++/src"]
-libraries = ['voro++']
+includedirs = []
 cpp_extra_link_args = []
 # These default compile flags mimic the flags used in the Zeo++/Voro++ Makefile
 # with the addition of the -fPIC flag which is needed to build a shared library.
 cpp_extra_compile_args = [
-    "-fPIC",
     "-Wall",
     "-ansi",
     "-pedantic",
@@ -49,6 +46,7 @@ if platform.system() == "Darwin" and using_clang():
     cpp_extra_link_args.append("-mmacosx-version-min=10.7")
 
 common_srcfiles = [
+    'src/voro++/src/voro++.cc',
     'src/networkanalysis.cc',
     'src/networkstorage.cc',
     'src/networkinfo.cc',
@@ -140,8 +138,6 @@ extensions = [
         "zeoplusplus.netstorage",
         sources=netstorage_srcfiles, 
         include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
         extra_compile_args=cpp_extra_compile_args,
         extra_link_args=cpp_extra_link_args,
         language=language
@@ -150,8 +146,6 @@ extensions = [
         "zeoplusplus.voronoicell",
         sources=voronoicell_srcfiles,
         include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
         extra_compile_args=cpp_extra_compile_args,
         extra_link_args=cpp_extra_link_args,
         language=language
@@ -160,8 +154,6 @@ extensions = [
         "zeoplusplus.high_accuracy", 
         sources=highaccuracy_srcfiles,
         include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
         extra_compile_args=cpp_extra_compile_args,
         extra_link_args=cpp_extra_link_args,
         language=language
@@ -170,8 +162,6 @@ extensions = [
         "zeoplusplus.area_volume", 
         sources=areavol_srcfiles,
         include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
         extra_compile_args=cpp_extra_compile_args,
         extra_link_args=cpp_extra_link_args,
         language=language
@@ -180,8 +170,6 @@ extensions = [
         "zeoplusplus.cluster", 
         sources=cluster_srcfiles,
         include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
         extra_compile_args=cpp_extra_compile_args,
         extra_link_args=cpp_extra_link_args,
         language=language
@@ -190,8 +178,6 @@ extensions = [
         "zeoplusplus.cycle", 
         sources=cycle_srcfiles,
         include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
         extra_compile_args=cpp_extra_compile_args,
         extra_link_args=cpp_extra_link_args,
         language=language
@@ -200,8 +186,6 @@ extensions = [
         "zeoplusplus.graphstorage",
         sources=graphstorage_srcfiles,
         include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
         extra_compile_args=cpp_extra_compile_args,
         extra_link_args=cpp_extra_link_args,
         language=language
@@ -210,8 +194,6 @@ extensions = [
         "zeoplusplus.netio",
         sources=netio_srcfiles,
         include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
         extra_compile_args=cpp_extra_compile_args,
         extra_link_args=cpp_extra_link_args,
         language=language
@@ -220,8 +202,6 @@ extensions = [
         "zeoplusplus.channel", 
         sources=channel_srcfiles,
         include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
         extra_compile_args=cpp_extra_compile_args,
         extra_link_args=cpp_extra_link_args,
         language=language
@@ -244,8 +224,6 @@ extensions = [
         "zeoplusplus.psd",
         sources=psd_srcfiles,
         include_dirs=includedirs,
-        libraries=libraries,
-        library_dirs=libdirs,
         extra_compile_args=cpp_extra_compile_args,
         extra_link_args=cpp_extra_link_args,
         language=language

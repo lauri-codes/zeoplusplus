@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include <utility>
-#include <voro++.hh>
+#include "voro++/src/voro++.hh"
 
 #include "networkstorage.h"
 #include "geometry.h"

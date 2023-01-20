@@ -34,7 +34,7 @@
 #include <fstream>
 #include <iomanip>
 #include <cassert>
-#include <voro++.hh>
+#include "voro++/src/voro++.hh"
 
 #include "voronoicell.h"
 #include "channel.h"

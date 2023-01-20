@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cfloat>
-#include <voro++.hh>
+#include "voro++/src/voro++.hh"
 
 #include "mindist.h"
 #include "geometry.h"

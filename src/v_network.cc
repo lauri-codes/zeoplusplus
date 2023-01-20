@@ -1,5 +1,5 @@
 //#include "../network.h"
-#include <voro++.hh>
+#include "voro++/src/voro++.hh"
 #include "v_network.h"
 
 using namespace std;

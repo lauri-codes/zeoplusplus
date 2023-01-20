@@ -2,7 +2,7 @@
 #define ZEOPP_V_NETWORK_HH
 
 #include <vector>
-#include <voro++.hh>
+#include "voro++/src/voro++.hh"
 
 #include "networkstorage.h"
 

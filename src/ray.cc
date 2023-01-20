@@ -2,7 +2,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <cassert>
-#include <voro++.hh>
+#include "voro++/src/voro++.hh"
 
 #include "ray.h"
 #include "zeo_consts.h"

@@ -5,7 +5,7 @@
  */
 
 #include <vector>
-#include <voro++.hh>
+#include "voro++/src/voro++.hh"
 
 #include "network.h"
 #include "networkio.h"
